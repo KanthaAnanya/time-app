@@ -11,6 +11,7 @@ The app provides three core time functions:
 This project is also packaged as a mobile Android app using Capacitor and Android Studio.
 
  Features
+ 
 🕒 Digital Clock
 
 Live real-time hours, minutes, seconds
@@ -54,17 +55,8 @@ JavaScript (ES6)
 Capacitor.js (for Android app packaging)
 
 Android Studio (APK build)
-📁 Project Structure
-time-app/
-│── www/
-│    └── index.html
-│
-│── android/                # Android project files (auto-generated)
-│── capacitor.config.json   # Capacitor settings
-│── package.json
-│── package-lock.json
 
-📦 Installation & Run (Web Version)
+Installation & Run (Web Version)
 1. Clone repository
 git clone https://github.com/KanthaAnanya/time-app.git
 cd time-app
