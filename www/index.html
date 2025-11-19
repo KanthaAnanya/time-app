@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clock - Stopwatch - Timer</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #ffd1dc, #ffe4b5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        background: white;
+        padding: 25px 30px;
+        width: 340px;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        text-align: center;
+    }
+    h2 {
+        margin: 0 0 10px;
+        color: #ff69b4;
+    }
+    .screen {
+        font-size: 38px;
+        font-weight: bold;
+        margin: 15px 0;
+        color: #333;
+        letter-spacing: 1px;
+    }
+    button {
+        margin: 6px;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+    button:hover {
+        transform: scale(1.08);
+    }
+    .pink { background: #ffb6c1; }
+    .yellow { background: #ffe27f; }
+    .green { background: #90ee90; }
+    .blue { background: #87cefa; }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+    <!-- CLOCK -->
+    <h2>Digital Clock</h2>
+    <div id="clock" class="screen">00:00:00</div>
+    <audio id="alarmSound">
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <hr>
+
+    <!-- STOPWATCH -->
+    <h2>Stopwatch</h2>
+    <div id="stopwatch" class="screen">00:00:00</div>
+    <button class="pink" onclick="startStopwatch()">Start</button>
+    <button class="yellow" onclick="stopStopwatch()">Stop</button>
+    <button class="blue" onclick="resetStopwatch()">Reset</button>
+
+    <hr>
+
+    <!-- TIMER -->
+    <h2>Timer (seconds)</h2>
+    <input type="number" id="timerInput" placeholder="Enter seconds" style="padding:8px; border-radius:8px; border:1px solid #ccc;">
+    <div id="timer" class="screen">00:00</div>
+    <button class="green" onclick="startTimer()">Start</button>
+    <button class="blue" onclick="stopTimer()">Stop</button>
+    <button class="yellow" onclick="resetTimer()">Reset</button>
+
+</div>
+
+<script>
+/* DIGITAL CLOCK */
+setInterval(() => {
+    let time = new Date().toLocaleTimeString();
+    document.getElementById("clock").innerHTML = time;
+}, 1000);
+
+/* STOPWATCH */
+let swSec = 0, swMin = 0, swHr = 0, swInterval;
+
+function updateStopwatch(){
+    swSec++;
+    if(swSec == 60){ swSec = 0; swMin++; }
+    if(swMin == 60){ swMin = 0; swHr++; }
+
+    document.getElementById("stopwatch").innerHTML =
+        (swHr<10?"0":"")+swHr+":"+(swMin<10?"0":"")+swMin+":"+(swSec<10?"0":"")+swSec;
+}
+function startStopwatch(){ swInterval = setInterval(updateStopwatch, 1000); }
+function stopStopwatch(){ clearInterval(swInterval); }
+function resetStopwatch(){
+    clearInterval(swInterval);
+    swSec = swMin = swHr = 0;
+    document.getElementById("stopwatch").innerHTML = "00:00:00";
+}
+
+/* TIMER */
+let timerSec, timerInterval;
+function startTimer(){
+    timerSec = document.getElementById("timerInput").value;
+    timerInterval = setInterval(() => {
+        if(timerSec <= 0){ clearInterval(timerInterval);
+            document.getElementById("alarmSound").play();  // 🎵 Play sound when time ends
+            return;  }
+        timerSec--;
+        let min = Math.floor(timerSec / 60);
+        let sec = timerSec % 60;
+        document.getElementById("timer").innerHTML =
+            (min<10?"0":"")+min+":"+(sec<10?"0":"")+sec;
+    }, 1000);
+}
+function stopTimer(){ clearInterval(timerInterval); }
+function resetTimer(){
+    clearInterval(timerInterval);
+    document.getElementById("timer").innerHTML = "00:00";
+}
+</script>
+
+</body>
+</html>
