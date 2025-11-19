@@ -5,7 +5,9 @@ A simple, responsive, and interactive time utility web application built using H
 The app provides three core time functions:
 
  Digital Clock
+ 
  Stopwatch (Start / Stop / Reset / Lap Recording)
+ 
  Countdown Timer
 
 This project is also packaged as a mobile Android app using Capacitor and Android Studio.
@@ -21,10 +23,6 @@ Live real-time hours, minutes, seconds
 ⏱️ Stopwatch
 
 Start / Stop / Reset functionality
-
-Lap recording
-
-Millisecond precision
 
 ⏲️ Countdown Timer
 
@@ -72,19 +70,22 @@ The clock/timer/stopwatch will run directly in your browser.
 
 📱 Build Android APK
 1. Install dependencies
+
 npm install
 
 2. Copy web assets
-npx cap copy
+
+    npx cap copy
 
 3. Open Android Studio
-npx cap open android
+
+    npx cap open android
 
 4. Build APK
 
-In Android Studio:
-Build → Build APK(s)
+   In Android Studio:
+   Build → Build APK(s)
 
-APK will appear in:
+   APK will appear in:
 
-android/app/build/outputs/apk/debug/app-debug.apk
+   android/app/build/outputs/apk/debug/app-debug.apk
